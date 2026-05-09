@@ -11,7 +11,15 @@ function Form() {
     const [dataForm, setDataForm] = useState(formDataInitial);
 
     const handleChange = (event) => {
+        const target = event.target;
+        console.log(target);
         
+        const {
+            value,
+            name,
+            type,
+            checked,
+        } = target;
     }
 
     return (
@@ -28,6 +36,7 @@ function Form() {
                     type="text"
                     id="authorName"
                     name="author"
+                    onChange={handleChange}
                     placeholder="GianPeppe" />
             </div>
 
