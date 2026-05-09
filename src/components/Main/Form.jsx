@@ -28,7 +28,6 @@ function Form() {
         };
 
         setDataForm(newDataForm)
-        
     }
 
     return (
@@ -45,6 +44,7 @@ function Form() {
                     type="text"
                     id="authorName"
                     name="author"
+                    value={dataForm.author}
                     onChange={handleChange}
                     placeholder="GianPeppe" />
             </div>
@@ -61,6 +61,7 @@ function Form() {
                     type="text"
                     id="titlePost"
                     name="title"
+                    value={dataForm.title}
                     onChange={handleChange}
                     placeholder="Titolo post" />
             </div>
@@ -77,6 +78,7 @@ function Form() {
                     id="descriptionPost"
                     name="author"
                     rows={4}
+                    value={dataForm.description}
                     onChange={handleChange}
                     placeholder="Descrizione del post..." />
             </div>
@@ -87,6 +89,7 @@ function Form() {
                         className="form-check-input me-2"
                         id="statoPubblico"
                         name="stato"
+                        checked={dataForm.state === "public"}
                         onChange={handleChange}
                         value="pubblico"
                     />
@@ -103,6 +106,7 @@ function Form() {
                         className="form-check-input me-2"
                         id="statoBozza"
                         name="stato"
+                        checked={dataForm.state === "draft"}
                         onChange={handleChange}
                         value="bozza"
                     />
