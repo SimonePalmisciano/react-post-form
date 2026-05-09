@@ -1,4 +1,19 @@
+import { useState } from "react"
+
+const formDataInitial = {
+    author: "",
+    title: "",
+    description: "",
+    state: false,
+};
+
 function Form() {
+    const [dataForm, setDataForm] = useState(formDataInitial);
+
+    const handleChange = (event) => {
+        
+    }
+
     return (
         <form>
             <div className="mb-3">
@@ -78,6 +93,6 @@ function Form() {
                 </span>
             </div>
         </form>
-    )
+    );
 }
 export default Form
