@@ -4,23 +4,27 @@ const formDataInitial = {
     author: "",
     title: "",
     description: "",
-    state: false,
+    stato: false,
 };
+
+const API_URL = "https://69fdc18030ad0a6fd1c16e12.mockapi.io/api/v666/soul";
 
 function Form() {
     const [dataForm, setDataForm] = useState(formDataInitial);
 
     const handleChange = (event) => {
         const target = event.target;
+        console.log(target);
+
+        const tagType = target.type;
 
         const {
             value,
             name,
-            type,
             checked,
         } = target;
 
-        const valueToUpdate = type === "checkbox" ? checked : value;
+        const valueToUpdate = tagType === "checkbox" ? checked : value;
 
         const newDataForm = {
             ...dataForm,
@@ -28,10 +32,50 @@ function Form() {
         };
 
         setDataForm(newDataForm)
+        console.log(dataForm);
+
+    }
+
+    const submitHandler = (event) => {
+        event.preventDefault();
+
+        // const postData = {
+        //     author: 'Il Grande Mago delle Tastiere',
+        //     title: 'Avventure di un Programmatore Pazzerello',
+        //     body: 'Questa storia parla di un tizio che ha venduto l\'anima per un caffè gratis, ma ha finito per scrivere codice infinito! Con tanto di bug che si moltiplicano come conigli.',
+        //     public: true,
+        // };
+        fetch('https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(dataForm)
+        }).then(response => {
+            return response.json();
+        }).then(json => {
+            console.log(json);
+        });
+
+        //     fetch(API_URL, {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify(dataForm),
+        //     })
+        //         .then((response) => {
+        //             return response.json();
+        //         })
+        //         .then((jsonData) => {
+        //             console.log('risposta: ', jsonData);
+
+        //             return jsonData
+        //         })
     }
 
     return (
-        <form>
+        <form onSubmit={submitHandler}>
             <div className="mb-3">
                 <label
                     htmlFor="authorName"
@@ -76,49 +120,30 @@ function Form() {
                 <textarea
                     className="form-control"
                     id="descriptionPost"
-                    name="author"
+                    name="description"
                     rows={4}
                     value={dataForm.description}
                     onChange={handleChange}
                     placeholder="Descrizione del post..." />
             </div>
             <div className="mb-3">
-                <span className="me-2">
-                    <input
-                        type="radio"
-                        className="form-check-input me-2"
-                        id="statoPubblico"
-                        name="stato"
-                        checked={dataForm.state === "public"}
-                        onChange={handleChange}
-                        value="pubblico"
-                    />
-                    <label
-                        htmlFor="statoPubblico"
-                        className="form-label"
-                    >
-                        Vuoi che il post sia pubblico?
-                    </label>
-                </span>
-                <span>
-                    <input
-                        type="radio"
-                        className="form-check-input me-2"
-                        id="statoBozza"
-                        name="stato"
-                        checked={dataForm.state === "draft"}
-                        onChange={handleChange}
-                        value="bozza"
-                    />
-                    <label
-                        htmlFor="statoBozza"
-                        className="form-label"
-                    >
-                        Vuoi che il post sia pubblico?
-                    </label>
-                </span>
+                <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="public"
+                    checked={dataForm.stato}
+                    name="stato"
+                    onChange={handleChange}
+                />
+                <label
+                    htmlFor="public"
+                    className="form-label"
+                >
+                    Publlico
+                </label>
             </div>
-        </form>
+            <button className="btn btn-primary">Aggiungi post</button>
+        </form >
     );
 }
 export default Form
