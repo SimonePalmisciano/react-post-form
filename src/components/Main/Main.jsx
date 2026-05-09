@@ -1,6 +1,13 @@
+import Form from "./Form"
+
+
 function Main() {
     return (
-        <div>Main</div>
+        <main>
+            <div>
+                <Form />
+            </div>
+        </main>
     )
 }
 export default Main
