@@ -12,14 +12,23 @@ function Form() {
 
     const handleChange = (event) => {
         const target = event.target;
-        console.log(target);
-        
+
         const {
             value,
             name,
             type,
             checked,
         } = target;
+
+        const valueToUpdate = type === "checkbox" ? checked : value;
+
+        const newDataForm = {
+            ...dataForm,
+            [name]: valueToUpdate,
+        };
+
+        setDataForm(newDataForm)
+        
     }
 
     return (
@@ -52,6 +61,7 @@ function Form() {
                     type="text"
                     id="titlePost"
                     name="title"
+                    onChange={handleChange}
                     placeholder="Titolo post" />
             </div>
 
@@ -60,13 +70,14 @@ function Form() {
                     htmlFor="descriptionPost"
                     className="form-label"
                 >
-                    Inserisci il nome dell'autore
+                    Inserisci la descrizione
                 </label>
                 <textarea
                     className="form-control"
                     id="descriptionPost"
                     name="author"
                     rows={4}
+                    onChange={handleChange}
                     placeholder="Descrizione del post..." />
             </div>
             <div className="mb-3">
@@ -76,6 +87,7 @@ function Form() {
                         className="form-check-input me-2"
                         id="statoPubblico"
                         name="stato"
+                        onChange={handleChange}
                         value="pubblico"
                     />
                     <label
@@ -89,12 +101,13 @@ function Form() {
                     <input
                         type="radio"
                         className="form-check-input me-2"
-                        id="statoPubblico"
+                        id="statoBozza"
                         name="stato"
-                        value="pubblico"
+                        onChange={handleChange}
+                        value="bozza"
                     />
                     <label
-                        htmlFor="statoPubblico"
+                        htmlFor="statoBozza"
                         className="form-label"
                     >
                         Vuoi che il post sia pubblico?
